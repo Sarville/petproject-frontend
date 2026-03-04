@@ -106,7 +106,7 @@ export default function MemeSearch({ quota, onQuotaUsed }: Props) {
   return (
     <>
       <div className="bg-[#1e3a5f] rounded-2xl p-5 mb-4 shrink-0">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex flex-wrap items-center justify-between mb-3 gap-y-2">
           <h2 className="text-white font-bold text-xl">
             Meme Search
             {quota !== null && (
@@ -116,12 +116,12 @@ export default function MemeSearch({ quota, onQuotaUsed }: Props) {
           <button
             onClick={handleRandom}
             disabled={randomLoading}
-            className="text-slate-300 hover:text-white border border-slate-600 hover:border-slate-400 px-3 py-1.5 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap"
+            className="text-slate-300 hover:text-white border border-slate-600 hover:border-slate-400 px-3 py-1.5 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap shrink-0"
           >
             {randomLoading ? "..." : "Random Meme"}
           </button>
         </div>
-        <form onSubmit={handleSearch} className="flex gap-2">
+        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
             value={query}
@@ -132,7 +132,7 @@ export default function MemeSearch({ quota, onQuotaUsed }: Props) {
           <button
             type="submit"
             disabled={loading || !query.trim()}
-            className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold px-5 py-2 rounded-lg transition-colors whitespace-nowrap"
+            className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold px-5 py-2 rounded-lg transition-colors"
           >
             {loading ? "..." : "Search"}
           </button>
@@ -170,7 +170,7 @@ export default function MemeSearch({ quota, onQuotaUsed }: Props) {
                 <p className="text-slate-500 text-center py-10">No memes found.</p>
               ) : (
                 <>
-                  <div className="grid grid-cols-5 gap-2">
+                  <div className="grid grid-cols-3 sm:grid-cols-5 gap-2">
                     {result.memes.map((meme) => (
                       <div
                         key={meme.id}
@@ -234,14 +234,14 @@ export default function MemeSearch({ quota, onQuotaUsed }: Props) {
           className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={(e) => { if (e.target === e.currentTarget) closeRandom(); }}
         >
-          <div className="bg-[#0f2239] rounded-2xl shadow-2xl flex flex-col overflow-hidden" style={{ width: PREVIEW_SIZE }}>
+          <div className="bg-[#0f2239] rounded-2xl shadow-2xl flex flex-col overflow-hidden w-full max-w-[360px]">
             <div className="flex items-center justify-between px-5 py-3 border-b border-slate-700 shrink-0">
               <h2 className="text-white font-bold">{randomError ? "Error" : "Random Meme"}</h2>
               <button onClick={closeRandom} className="text-slate-400 hover:text-white text-xl leading-none">×</button>
             </div>
             <div className="p-4">
               {randomLoading ? (
-                <div className="flex items-center justify-center bg-slate-800 rounded-xl" style={{ height: PREVIEW_SIZE }}>
+                <div className="flex items-center justify-center bg-slate-800 rounded-xl h-64 sm:h-[360px]">
                   <p className="text-slate-500">Loading...</p>
                 </div>
               ) : randomError ? (
@@ -251,8 +251,7 @@ export default function MemeSearch({ quota, onQuotaUsed }: Props) {
                   <img
                     src={randomMeme.url}
                     alt={randomMeme.description ?? "meme"}
-                    className="w-full rounded-xl bg-slate-800 object-contain"
-                    style={{ height: PREVIEW_SIZE }}
+                    className="w-full min-h-[180px] max-h-64 sm:max-h-[360px] rounded-xl bg-slate-800 object-contain"
                   />
                   {randomMeme.description && (
                     <p className="text-slate-300 text-xs leading-relaxed line-clamp-2">{randomMeme.description}</p>

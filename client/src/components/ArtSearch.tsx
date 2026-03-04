@@ -129,7 +129,7 @@ export default function ArtSearch({ quota, onQuotaUsed }: Props) {
   return (
     <>
       <div className="bg-[#1e3a5f] rounded-2xl p-5 mb-4 shrink-0">
-        <div className="flex items-center justify-between mb-3">
+        <div className="flex flex-wrap items-center justify-between mb-3 gap-y-2">
           <h2 className="text-white font-bold text-xl">
             Art Search
             {quota !== null && (
@@ -139,12 +139,12 @@ export default function ArtSearch({ quota, onQuotaUsed }: Props) {
           <button
             onClick={handleRandom}
             disabled={randomLoading}
-            className="text-slate-300 hover:text-white border border-slate-600 hover:border-slate-400 px-3 py-1.5 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap"
+            className="text-slate-300 hover:text-white border border-slate-600 hover:border-slate-400 px-3 py-1.5 rounded-lg text-sm transition-colors disabled:opacity-50 whitespace-nowrap shrink-0"
           >
             {randomLoading ? "..." : "Random Art"}
           </button>
         </div>
-        <form onSubmit={handleSearch} className="flex gap-2">
+        <form onSubmit={handleSearch} className="flex flex-col sm:flex-row gap-2">
           <input
             type="text"
             value={query}
@@ -155,7 +155,7 @@ export default function ArtSearch({ quota, onQuotaUsed }: Props) {
           <button
             type="submit"
             disabled={loading || !query.trim()}
-            className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold px-5 py-2 rounded-lg transition-colors whitespace-nowrap"
+            className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 text-white font-semibold px-5 py-2 rounded-lg transition-colors"
           >
             {loading ? "..." : "Search"}
           </button>
@@ -240,7 +240,7 @@ export default function ArtSearch({ quota, onQuotaUsed }: Props) {
                     <img
                       src={detail.image}
                       alt={detail.title}
-                      className="w-full max-h-64 object-contain rounded-xl bg-slate-800"
+                      className="w-full min-h-[180px] max-h-64 object-contain rounded-xl bg-slate-800"
                     />
                   )}
                   {detail.author && (
