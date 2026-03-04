@@ -133,7 +133,7 @@ export default function ArtSearch({ quota, onQuotaUsed }: Props) {
           <h2 className="text-white font-bold text-xl">
             Art Search
             {quota !== null && (
-              <span className="text-slate-400 text-sm font-normal ml-2">({quota} requests left)</span>
+              <span className="text-slate-400 text-sm font-normal ml-2">({quota} requests left today)</span>
             )}
           </h2>
           <button
