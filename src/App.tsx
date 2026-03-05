@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import ArtSearch from "./components/ArtSearch";
 import MemeSearch from "./components/MemeSearch";
 import WishList from "./components/WishList";
@@ -24,7 +24,10 @@ export default function App() {
     }
   }, []);
 
-  useEffect(() => { fetchQuotas(); }, [fetchQuotas]);
+  const fetchQuotasRef = useRef(fetchQuotas);
+  fetchQuotasRef.current = fetchQuotas;
+
+  useEffect(() => { fetchQuotasRef.current(); }, []);
 
   return (
     <div className="h-screen overflow-y-auto">

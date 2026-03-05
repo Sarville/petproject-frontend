@@ -1,4 +1,4 @@
-name: Deploy to production
+name: Deploy frontend to production
 
 on:
   push:
@@ -16,6 +16,6 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           key: ${{ secrets.SERVER_SSH_KEY }}
           script: |
-            cd /var/www/project_nest
+            cd /var/www/petproject-frontend
             git pull origin master
             docker compose -f docker-compose.prod.yml up -d --build --remove-orphans
