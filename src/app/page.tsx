@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import NavBar from '@/components/NavBar';
 import AdminPanel from '@/components/AdminPanel';
@@ -29,10 +29,7 @@ function MainView() {
     }
   }, []);
 
-  const fetchQuotasRef = useRef(fetchQuotas);
-  fetchQuotasRef.current = fetchQuotas;
-
-  useEffect(() => { fetchQuotasRef.current(); }, []);
+  useEffect(() => { fetchQuotas(); }, [fetchQuotas]);
 
   return (
     <>
