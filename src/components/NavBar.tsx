@@ -5,9 +5,11 @@ import { useAuth } from "../context/AuthContext";
 interface Props {
   onAdminClick: () => void;
   isAdminView: boolean;
+  onDashboardClick: () => void;
+  isDashboardView: boolean;
 }
 
-export default function NavBar({ onAdminClick, isAdminView }: Props) {
+export default function NavBar({ onAdminClick, isAdminView, onDashboardClick, isDashboardView }: Props) {
   const { user, logout } = useAuth();
 
   return (
@@ -22,6 +24,16 @@ export default function NavBar({ onAdminClick, isAdminView }: Props) {
           )}
         </div>
         <div className="flex items-center gap-2 shrink-0">
+          <button
+            onClick={onDashboardClick}
+            className={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${
+              isDashboardView
+                ? "bg-blue-600 text-white border-blue-600"
+                : "text-slate-300 hover:text-white border-slate-600 hover:border-slate-400"
+            }`}
+          >
+            {isDashboardView ? "← App" : "Account"}
+          </button>
           {user?.role === "ADMIN" && (
             <button
               onClick={onAdminClick}

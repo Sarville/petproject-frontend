@@ -1,9 +1,11 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import NavBar from '@/components/NavBar';
 import AdminPanel from '@/components/AdminPanel';
+import UserDashboard from '@/components/UserDashboard';
 import ArtSearch from '@/components/ArtSearch';
 import MemeSearch from '@/components/MemeSearch';
 import WishList from '@/components/WishList';
@@ -58,6 +60,21 @@ function MainView() {
 export default function HomePage() {
   const { user, loading } = useAuth();
   const [adminView, setAdminView] = useState(false);
+  const [dashboardView, setDashboardView] = useState(false);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (!loading && !user) {
+      router.replace('/login');
+    }
+  }, [loading, user, router]);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('dashboard') === '1') setDashboardView(true);
+    }
+  }, []);
 
   if (loading) {
     return (
@@ -69,13 +86,34 @@ export default function HomePage() {
 
   if (!user) return null;
 
+  const handleAdminClick = () => {
+    setAdminView((v) => !v);
+    setDashboardView(false);
+  };
+
+  const handleDashboardClick = () => {
+    setDashboardView((v) => !v);
+    setAdminView(false);
+  };
+
+  let content: React.ReactNode;
+  if (dashboardView) {
+    content = <UserDashboard />;
+  } else if (adminView && user.role === 'ADMIN') {
+    content = <AdminPanel />;
+  } else {
+    content = <MainView />;
+  }
+
   return (
     <div className="h-screen flex flex-col">
       <NavBar
-        onAdminClick={() => setAdminView((v) => !v)}
+        onAdminClick={handleAdminClick}
         isAdminView={adminView}
+        onDashboardClick={handleDashboardClick}
+        isDashboardView={dashboardView}
       />
-      {adminView && user.role === 'ADMIN' ? <AdminPanel /> : <MainView />}
+      {content}
     </div>
   );
 }
