@@ -1,7 +1,9 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
-export function middleware(request: NextRequest) {
+const PROTECTED = ['/', '/admin', '/onboarding'];
+
+export function proxy(request: NextRequest) {
   const token = request.cookies.get('access_token');
   const { pathname } = request.nextUrl;
 
@@ -9,7 +11,7 @@ export function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL('/', request.url));
   }
 
-  if (pathname === '/' && !token) {
+  if (PROTECTED.includes(pathname) && !token) {
     return NextResponse.redirect(new URL('/login', request.url));
   }
 
@@ -17,5 +19,5 @@ export function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/', '/login'],
+  matcher: ['/', '/login', '/admin', '/onboarding'],
 };

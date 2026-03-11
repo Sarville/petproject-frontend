@@ -4,6 +4,9 @@ import { AuthProvider } from '@/context/AuthContext';
 
 export const metadata: Metadata = {
   title: 'PetProject',
+  icons: {
+    icon: '/logos/logomark-terminal-wave.svg',
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

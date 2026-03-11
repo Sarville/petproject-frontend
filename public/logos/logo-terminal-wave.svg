@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 160" width="560" height="160">
+  <defs>
+    <!-- Background gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060d0a"/>
+      <stop offset="100%" stop-color="#080f0b"/>
+    </linearGradient>
+
+    <!-- Green glow filter for icon -->
+    <filter id="greenGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Subtle glow for wave -->
+    <filter id="waveGlow" x="-10%" y="-60%" width="120%" height="220%">
+      <feGaussianBlur stdDeviation="2.5" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Text glow -->
+    <filter id="textGlow" x="-5%" y="-30%" width="110%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+
+    <!-- Scan line pattern -->
+    <pattern id="scanlines" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="rgba(0,255,136,0.03)"/>
+      <rect y="1" width="1" height="2" fill="transparent"/>
+    </pattern>
+
+    <!-- Icon border gradient -->
+    <linearGradient id="borderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d4a38"/>
+      <stop offset="50%" stop-color="#00ff88" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#1a2e22"/>
+    </linearGradient>
+
+    <!-- Word mark gradient -->
+    <linearGradient id="wordGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#e8f5ee"/>
+      <stop offset="60%" stop-color="#c8e8d4"/>
+      <stop offset="100%" stop-color="#a0c8b0"/>
+    </linearGradient>
+  </defs>
+
+  <!-- ── OUTER FRAME ── -->
+  <rect width="560" height="160" rx="16" fill="url(#bgGrad)"/>
+  <!-- scanline overlay -->
+  <rect width="560" height="160" rx="16" fill="url(#scanlines)" opacity="0.6"/>
+  <!-- subtle border -->
+  <rect width="560" height="160" rx="16" fill="none" stroke="#1e3028" stroke-width="1.5"/>
+
+  <!-- ── ICON BLOCK (left) ── -->
+  <!-- Icon shadow/depth -->
+  <rect x="22" y="22" width="96" height="96" rx="14" fill="#00ff88" opacity="0.04" filter="url(#greenGlow)"/>
+  <!-- Icon background -->
+  <rect x="20" y="20" width="96" height="96" rx="13" fill="#060d0a"/>
+  <!-- Icon border -->
+  <rect x="20" y="20" width="96" height="96" rx="13" fill="none" stroke="url(#borderGrad)" stroke-width="1.5"/>
+
+  <!-- Titlebar -->
+  <rect x="20" y="20" width="96" height="26" rx="13" fill="#1a2e22"/>
+  <rect x="20" y="33" width="96" height="13" fill="#1a2e22"/>
+  <!-- Divider line -->
+  <line x1="20" y1="46" x2="116" y2="46" stroke="#2d4a38" stroke-width="1"/>
+
+  <!-- Traffic lights -->
+  <circle cx="38"  cy="33" r="5.5" fill="#ff453a"/>
+  <circle cx="55"  cy="33" r="5.5" fill="#ffd60a"/>
+  <circle cx="72"  cy="33" r="5.5" fill="#30d158"/>
+  <!-- Light inner shine -->
+  <circle cx="36.5" cy="31.5" r="1.8" fill="white" opacity="0.25"/>
+  <circle cx="53.5" cy="31.5" r="1.8" fill="white" opacity="0.25"/>
+  <circle cx="70.5" cy="31.5" r="1.8" fill="white" opacity="0.25"/>
+
+  <!-- Prompt triangle -->
+  <polygon points="29,57 29,69 36,63" fill="#00ff88" filter="url(#greenGlow)"/>
+
+  <!-- Cursor block -->
+  <rect x="40" y="65" width="14" height="5" rx="1.5" fill="#00ff88" opacity="0.9" filter="url(#greenGlow)"/>
+
+  <!-- Sine wave -->
+  <path d="M24,88 Q30,80 36,88 Q42,96 48,88 Q54,80 60,88 Q66,96 72,88 Q78,80 84,88 Q90,96 96,88 Q104,84 112,86"
+        fill="none" stroke="#00ff88" stroke-width="2.5" stroke-linecap="round" filter="url(#waveGlow)"/>
+
+  <!-- ── WORDMARK ── -->
+  <!-- Main name -->
+  <text
+    x="138" y="86"
+    font-family="'SF Mono', 'Fira Code', 'Cascadia Code', 'JetBrains Mono', monospace"
+    font-size="42"
+    font-weight="700"
+    letter-spacing="-1"
+    fill="url(#wordGrad)"
+  >terminal</text>
+
+  <!-- Accent dot -->
+  <circle cx="456" cy="74" r="5" fill="#00ff88" filter="url(#greenGlow)"/>
+
+  <!-- Tagline -->
+  <text
+    x="140" y="108"
+    font-family="'SF Mono', 'Fira Code', 'Cascadia Code', monospace"
+    font-size="13"
+    letter-spacing="4"
+    fill="#2d5a3d"
+  >── wave ──────────────────</text>
+
+  <!-- Version / sub label -->
+  <text
+    x="140" y="126"
+    font-family="'SF Mono', 'Fira Code', monospace"
+    font-size="11"
+    letter-spacing="2.5"
+    fill="#1e3828"
+  >v2.0  ·  dev tools  ·  open source</text>
+
+  <!-- Right decorative element: mini wave repeat -->
+  <path d="M480,50 Q487,44 494,50 Q501,56 508,50 Q515,44 522,50 Q529,56 536,50"
+        fill="none" stroke="#1a3025" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M480,58 Q487,52 494,58 Q501,64 508,58 Q515,52 522,58 Q529,64 536,58"
+        fill="none" stroke="#1a3025" stroke-width="1" stroke-linecap="round"/>
+
+  <!-- Corner accents -->
+  <path d="M8,30 L8,8 L30,8" fill="none" stroke="#1e3028" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M552,30 L552,8 L530,8" fill="none" stroke="#1e3028" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M8,130 L8,152 L30,152" fill="none" stroke="#1e3028" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M552,130 L552,152 L530,152" fill="none" stroke="#1e3028" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

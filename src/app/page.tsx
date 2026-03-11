@@ -3,21 +3,29 @@
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
-import NavBar from '@/components/NavBar';
-import AdminPanel from '@/components/AdminPanel';
+import Sidebar from '@/components/Sidebar';
+import TopBar from '@/components/TopBar';
 import UserDashboard from '@/components/UserDashboard';
 import ArtSearch from '@/components/ArtSearch';
 import MemeSearch from '@/components/MemeSearch';
 import WishList from '@/components/WishList';
-import LogPanel from '@/components/LogPanel';
 
 interface Quotas {
   artsearch: number | null;
   humorapi: number | null;
 }
 
-function MainView() {
-  const [logsOpen, setLogsOpen] = useState(false);
+function WishesView() {
+  return (
+    <div className="max-w-2xl mx-auto px-6 py-6 flex flex-col min-h-full">
+      <div className="flex-1 flex flex-col min-h-[400px]">
+        <WishList />
+      </div>
+    </div>
+  );
+}
+
+function ApisView() {
   const [quotas, setQuotas] = useState<Quotas>({ artsearch: null, humorapi: null });
 
   const fetchQuotas = useCallback(async () => {
@@ -34,47 +42,34 @@ function MainView() {
   useEffect(() => { fetchQuotas(); }, [fetchQuotas]);
 
   return (
-    <>
-      <div className="flex-1 overflow-y-auto">
-        <div className="max-w-2xl mx-auto px-4 py-6 flex flex-col min-h-full">
-          <ArtSearch quota={quotas.artsearch} onQuotaUsed={fetchQuotas} />
-          <MemeSearch quota={quotas.humorapi} onQuotaUsed={fetchQuotas} />
-          <div className="flex-1 flex flex-col min-h-[400px]">
-            <WishList />
-          </div>
-          <div className="mt-4 shrink-0">
-            <button
-              onClick={() => setLogsOpen(true)}
-              className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors text-sm"
-            >
-              Logs
-            </button>
-          </div>
-        </div>
-      </div>
-      <LogPanel open={logsOpen} onClose={() => setLogsOpen(false)} />
-    </>
+    <div className="max-w-2xl mx-auto px-6 py-6 flex flex-col gap-6">
+      <ArtSearch quota={quotas.artsearch} onQuotaUsed={fetchQuotas} />
+      <MemeSearch quota={quotas.humorapi} onQuotaUsed={fetchQuotas} />
+    </div>
   );
 }
+
+const PAGE_TITLES: Record<string, string> = {
+  '': 'Wishes',
+  'apis': 'External APIs',
+  'account': 'Account',
+};
 
 function HomePageInner() {
   const { user, loading } = useAuth();
   const router = useRouter();
   const searchParams = useSearchParams();
-
-  const menu = searchParams.get('menu');
-  const dashboardView = menu === 'account';
-  const adminView = menu === 'admin';
+  const menu = searchParams.get('menu') ?? '';
 
   useEffect(() => {
     if (!loading && !user) {
       router.replace('/login');
       return;
     }
-    if (!loading && user && menu === 'admin' && user.role !== 'ADMIN') {
-      router.replace('/');
+    if (!loading && user && user.nickname == null) {
+      router.replace('/onboarding');
     }
-  }, [loading, user, menu, router]);
+  }, [loading, user, router]);
 
   if (loading) {
     return (
@@ -86,32 +81,24 @@ function HomePageInner() {
 
   if (!user) return null;
 
-  const handleAdminClick = () => {
-    router.push(adminView ? '/' : '/?menu=admin');
-  };
-
-  const handleDashboardClick = () => {
-    router.push(dashboardView ? '/' : '/?menu=account');
-  };
-
   let content: React.ReactNode;
-  if (dashboardView) {
+  if (menu === 'account') {
     content = <UserDashboard />;
-  } else if (adminView && user.role === 'ADMIN') {
-    content = <AdminPanel />;
+  } else if (menu === 'apis') {
+    content = <ApisView />;
   } else {
-    content = <MainView />;
+    content = <WishesView />;
   }
 
   return (
-    <div className="h-screen flex flex-col">
-      <NavBar
-        onAdminClick={handleAdminClick}
-        isAdminView={adminView}
-        onDashboardClick={handleDashboardClick}
-        isDashboardView={dashboardView}
-      />
-      {content}
+    <div className="h-screen flex overflow-hidden">
+      <Sidebar />
+      <div className="flex-1 flex flex-col min-w-0">
+        <TopBar title={PAGE_TITLES[menu] ?? 'App'} />
+        <main className="flex-1 overflow-y-auto">
+          {content}
+        </main>
+      </div>
     </div>
   );
 }

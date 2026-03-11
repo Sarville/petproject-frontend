@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <defs>
+    <filter id="g" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="wg" x="-10%" y="-80%" width="120%" height="260%">
+      <feGaussianBlur stdDeviation="2.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <linearGradient id="ibg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070f0b"/>
+      <stop offset="100%" stop-color="#050b07"/>
+    </linearGradient>
+    <linearGradient id="ibrd" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2a4535"/>
+      <stop offset="40%" stop-color="#00ff88" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1a3025"/>
+    </linearGradient>
+    <pattern id="isl" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="rgba(0,255,136,0.03)"/>
+    </pattern>
+  </defs>
+
+  <!-- Outer glow ring -->
+  <rect x="4" y="4" width="112" height="112" rx="22" fill="#00ff88" opacity="0.05" filter="url(#g)"/>
+
+  <!-- Main background -->
+  <rect x="6" y="6" width="108" height="108" rx="20" fill="url(#ibg)"/>
+  <!-- scanlines -->
+  <rect x="6" y="6" width="108" height="108" rx="20" fill="url(#isl)"/>
+  <!-- border -->
+  <rect x="6" y="6" width="108" height="108" rx="20" fill="none" stroke="url(#ibrd)" stroke-width="1.8"/>
+
+  <!-- Titlebar -->
+  <rect x="6" y="6" width="108" height="30" rx="20" fill="#162219"/>
+  <rect x="6" y="25" width="108" height="11" fill="#162219"/>
+  <!-- Divider -->
+  <line x1="6" y1="36" x2="114" y2="36" stroke="#2a4535" stroke-width="1"/>
+
+  <!-- Traffic lights -->
+  <circle cx="28"  cy="21" r="6.5" fill="#ff453a"/>
+  <circle cx="47"  cy="21" r="6.5" fill="#ffd60a"/>
+  <circle cx="66"  cy="21" r="6.5" fill="#30d158"/>
+  <!-- Shine -->
+  <circle cx="25.5" cy="18.5" r="2.2" fill="white" opacity="0.22"/>
+  <circle cx="44.5" cy="18.5" r="2.2" fill="white" opacity="0.22"/>
+  <circle cx="63.5" cy="18.5" r="2.2" fill="white" opacity="0.22"/>
+
+  <!-- Prompt -->
+  <polygon points="16,46 16,60 24,53" fill="#00ff88" filter="url(#g)"/>
+
+  <!-- Cursor -->
+  <rect x="28" y="55" width="18" height="6" rx="2" fill="#00ff88" opacity="0.9" filter="url(#g)"/>
+
+  <!-- Wave (main feature) -->
+  <path d="M12,86 Q18,76 24,86 Q30,96 36,86 Q42,76 48,86 Q54,96 60,86 Q66,76 72,86 Q78,96 84,86 Q90,76 96,86 Q102,91 108,88"
+        fill="none" stroke="#00ff88" stroke-width="3.5" stroke-linecap="round" filter="url(#wg)"/>
+  <!-- Wave glow layer -->
+  <path d="M12,86 Q18,76 24,86 Q30,96 36,86 Q42,76 48,86 Q54,96 60,86 Q66,76 72,86 Q78,96 84,86 Q90,76 96,86 Q102,91 108,88"
+        fill="none" stroke="#00ff88" stroke-width="1.5" stroke-linecap="round" opacity="0.5"/>
+
+  <!-- Corner micro accents -->
+  <path d="M10,20 L10,10 L20,10" fill="none" stroke="#243c2c" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M110,20 L110,10 L100,10" fill="none" stroke="#243c2c" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M10,100 L10,110 L20,110" fill="none" stroke="#243c2c" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M110,100 L110,110 L100,110" fill="none" stroke="#243c2c" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

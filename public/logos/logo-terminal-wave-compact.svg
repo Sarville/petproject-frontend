@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 80" width="400" height="80">
+  <defs>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="wglow" x="-10%" y="-80%" width="120%" height="260%">
+      <feGaussianBlur stdDeviation="2"/>
+    </filter>
+    <linearGradient id="bg2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#070e0b"/>
+      <stop offset="100%" stop-color="#060b08"/>
+    </linearGradient>
+    <linearGradient id="wm2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f0f8f4"/>
+      <stop offset="100%" stop-color="#b8d8c4"/>
+    </linearGradient>
+    <pattern id="sl2" x="0" y="0" width="1" height="3" patternUnits="userSpaceOnUse">
+      <rect width="1" height="1" fill="rgba(0,255,136,0.025)"/>
+    </pattern>
+  </defs>
+
+  <!-- bg -->
+  <rect width="400" height="80" rx="12" fill="url(#bg2)"/>
+  <rect width="400" height="80" rx="12" fill="url(#sl2)"/>
+  <rect width="400" height="80" rx="12" fill="none" stroke="#182820" stroke-width="1"/>
+
+  <!-- ICON -->
+  <rect x="12" y="10" width="60" height="60" rx="9" fill="#060d0a"/>
+  <rect x="12" y="10" width="60" height="60" rx="9" fill="none" stroke="#243c2e" stroke-width="1.2"/>
+  <!-- titlebar -->
+  <rect x="12" y="10" width="60" height="17" rx="9" fill="#162219"/>
+  <rect x="12" y="20" width="60" height="7" fill="#162219"/>
+  <line x1="12" y1="27" x2="72" y2="27" stroke="#243c2e" stroke-width="0.8"/>
+  <!-- dots -->
+  <circle cx="24"  cy="18.5" r="3.5" fill="#ff453a"/>
+  <circle cx="34"  cy="18.5" r="3.5" fill="#ffd60a"/>
+  <circle cx="44"  cy="18.5" r="3.5" fill="#30d158"/>
+  <!-- prompt -->
+  <polygon points="17,34 17,42 22,38" fill="#00ff88" filter="url(#glow)"/>
+  <!-- cursor -->
+  <rect x="24" y="39" width="9" height="3" rx="1" fill="#00ff88" filter="url(#glow)"/>
+  <!-- wave -->
+  <path d="M15,56 Q18.5,51 22,56 Q25.5,61 29,56 Q32.5,51 36,56 Q39.5,61 43,56 Q46.5,51 50,56 Q53.5,61 57,56 Q60,53.5 64,54.5"
+        fill="none" stroke="#00ff88" stroke-width="1.8" stroke-linecap="round" filter="url(#glow)"/>
+
+  <!-- WORDMARK -->
+  <text x="86" y="46"
+    font-family="'SF Mono','Fira Code','Cascadia Code','JetBrains Mono',monospace"
+    font-size="28" font-weight="700" letter-spacing="-0.5"
+    fill="url(#wm2)">terminal</text>
+
+  <!-- green dot accent -->
+  <circle cx="287" cy="36" r="3.5" fill="#00ff88" filter="url(#glow)"/>
+
+  <!-- wave tagline -->
+  <text x="88" y="62"
+    font-family="'SF Mono','Fira Code',monospace"
+    font-size="9.5" letter-spacing="3.5"
+    fill="#253d2e">W A V E</text>
+
+  <!-- right mini deco -->
+  <path d="M330,28 Q335,23 340,28 Q345,33 350,28 Q355,23 360,28 Q365,33 370,28"
+        fill="none" stroke="#182820" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M330,35 Q335,30 340,35 Q345,40 350,35 Q355,30 360,35 Q365,40 370,35"
+        fill="none" stroke="#182820" stroke-width="0.8" stroke-linecap="round"/>
+  <!-- corner marks -->
+  <path d="M5,20 L5,5 L20,5" fill="none" stroke="#182820" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M395,20 L395,5 L380,5" fill="none" stroke="#182820" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M5,60 L5,75 L20,75" fill="none" stroke="#182820" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M395,60 L395,75 L380,75" fill="none" stroke="#182820" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
